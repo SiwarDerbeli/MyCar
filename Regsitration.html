@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        function signUp() {
+  
+       var nC=document.getElementById("numChass").textContent;
+       if (nC=='111111' ) {
+            document.getElementById("ex").style.display="block"
+            document.getElementById("signin").style.display="block"
+        }
+        else{
+            window.open("index.html");
+       
+        }
+       
+   }
+    </script>
+    <style>
+        /* Hide the default checkbox */
+.container input {
+ position: absolute;
+ opacity: 0;
+ cursor: pointer;
+ height: 0;
+ width: 0;
+ border-radius: 5px;
+}
+
+.container {
+ display: block;
+ position: relative;
+ cursor: pointer;
+ font-size: 20px;
+ user-select: none;
+ border-radius: 5px;
+ box-shadow: 2px 2px 0px rgb(183, 183, 183);
+}
+
+/* Create a custom checkbox */
+.checkmark {
+ position: relative;
+ top: 0;
+ left: 0;
+ height: 1.3em;
+ width: 1.3em;
+ background-color: #ccc;
+ border-radius: 5px;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+ box-shadow: 3px 3px 0px rgb(183, 183, 183);
+ transition: all 0.2s;
+ opacity: 1;
+ background-image: linear-gradient(45deg, rgb(100, 61, 219) 0%, rgb(217, 21, 239) 100%);
+}
+
+.container input ~ .checkmark {
+ transition: all 0.2s;
+ opacity: 1;
+ box-shadow: 1px 1px 0px rgb(183, 183, 183);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+ content: "";
+ position: absolute;
+ opacity: 0;
+ transition: all 0.2s;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+ opacity: 1;
+ transition: all 0.2s;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+ left: 0.45em;
+ top: 0.25em;
+ width: 0.25em;
+ height: 0.5em;
+ border: solid white;
+ border-width: 0 0.15em 0.15em 0;
+ transform: rotate(45deg);
+}
+    </style>
+      <title>Resgitration</title>
+</head>
+<body  class="p-10 bg-zinc-800 text-white">
+    <!-- nav barre -->
+    <div class="bg-zinc-800 flex  pl-6 flex-row items-center justify-between px-14 py-4 p-10">
+        <div class="flex flex-row pl-10 space-x-2 items-center">
+           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-teal-400 w-12 h-12">
+               <path fill-rule="evenodd" d="M12 6.75a5.25 5.25 0 016.775-5.025.75.75 0 01.313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.64l3.318-3.319a.75.75 0 011.248.313 5.25 5.25 0 01-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 112.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0112 6.75zM4.117 19.125a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" clip-rule="evenodd" />
+               <path d="M10.076 8.64l-2.201-2.2V4.874a.75.75 0 00-.364-.643l-3.75-2.25a.75.75 0 00-.916.113l-.75.75a.75.75 0 00-.113.916l2.25 3.75a.75.75 0 00.643.364h1.564l2.062 2.062 1.575-1.297z" />
+               <path fill-rule="evenodd" d="M12.556 17.329l4.183 4.182a3.375 3.375 0 004.773-4.773l-3.306-3.305a6.803 6.803 0 01-1.53.043c-.394-.034-.682-.006-.867.042a.589.589 0 00-.167.063l-3.086 3.748zm3.414-1.36a.75.75 0 011.06 0l1.875 1.876a.75.75 0 11-1.06 1.06L15.97 17.03a.75.75 0 010-1.06z" clip-rule="evenodd" />
+             </svg>
+             
+           <h1 style="font-family: 'Rajdhani', sans-serif;" class="text-bold text-4xl">MyCar</h1>
+       </div>
+       <div x-data="{ open: false, openn:false }" class="flex p-8 flex-row items-center space-x-8">
+           <h1 class="cursor-pointer hover:text-slate-400"><a href="index.html"> Home</a></h1>
+           <h1 class="cursor-pointer hover:text-slate-400" x-on:mouseout="open = ! open" x-on:mouseover="open = ! open"><a href="services.html">Services
+               <ul class="text-white" x-show="open">
+                   <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="quick service.html">Quick service</a></li>
+                   <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="diagnostic service.html">Diagnostic service</a></li>
+                   <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="repair service.html">Repair Service</a></li>
+                   <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="1000.html">1000km service</a></li>
+               </ul>
+           </a></h1>
+           <h1 class="cursor-pointer hover:text-slate-400"><a href="RDV.html">My appointments</a> </h1>
+
+           <h1 class="cursor-pointer hover:text-slate-400" x-on:mouseout="openn = ! openn" x-on:mouseover="openn = ! openn">Custumer Service
+            <ul class="text-white" x-show="openn">
+                <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="centre d'assistance.html">Help Center</a></li>
+                <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="satisfaction.html">Satisfaction</a></li>
+                <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="reclamation.html">Complaint</a></li>
+                
+            </ul>
+           </h1>
+           <div>
+           <button class="hover:text-teal-200 rounded p-2 border border-teal-400 text-teal-400 font-bold"><a href="Login.html"> Login</a></button>
+           <button class="hover:bg-teal-200 rounded p-2 bg-teal-400 text-white "><a href="Regsitration.html"> Register</a></button>
+           </div>
+       </div>
+       </div>
+    <!-- main -->
+
+    <div x-data="{ show: true , showw:false } " class="flex flex-col items-center justify-center ">
+    <div class="p-14 rounded-t flex flex-col items-center bg-white justify-center w-1/2  ">
+    <h1 class=" text-6xl text-indigo-600 font-bold p-4 " style="font-family: 'Rajdhani', sans-serif;">Registration</h1>
+     <div class="flex space-x-12">
+        <div x-bind:class="{'text-zinc-800 underline underline-offset-8': show}" x-on:click="show = !show , showw=!showw" class="cursor-pointer flex flex-row  space-x-2 ">
+          
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-zinc-800 w-8 h-8">
+                <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
+              </svg>
+            <h1 class="text-2xl text-zinc-800">Client</h1>
+
+        </div>
+
+        <div x-bind:class="{'text-zinc-800 underline underline-offset-8': showw}" x-on:click="showw = !showw, show=!show" class="cursor-pointer flex flex-row  space-x-2 ">
+          
+            <h1 class="text-2xl text-zinc-800">Vehicle</h1>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-zinc-800 w-8 h-8">
+                <path d="M3.375 4.5C2.339 4.5 1.5 5.34 1.5 6.375V13.5h12V6.375c0-1.036-.84-1.875-1.875-1.875h-8.25zM13.5 15h-12v2.625c0 1.035.84 1.875 1.875 1.875h.375a3 3 0 116 0h3a.75.75 0 00.75-.75V15z" />
+                <path d="M8.25 19.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0zM15.75 6.75a.75.75 0 00-.75.75v11.25c0 .087.015.17.042.248a3 3 0 015.958.464c.853-.175 1.522-.935 1.464-1.883a18.659 18.659 0 00-3.732-10.104 1.837 1.837 0 00-1.47-.725H15.75z" />
+                <path d="M19.5 19.5a1.5 1.5 0 10-3 0 1.5 1.5 0 003 0z" />
+              </svg>
+              
+
+        </div>
+     </div>
+    </div>
+     <div class="relative rounded-b p-8 bg-white w-1/2">
+    <div x-data="{ M:false ,F:false, C:false } " x-show="show" class="static space-y-4">
+        <div class="text-slate-600 ">
+            <div  class="flex space-x-4 items center font-bold">
+                <label class="container w-4">
+                 <input type="checkbox"  x-model="M">
+                 <div class="checkmark"></div>
+               </label><h1>Male</h1>
+                  </div>
+            <div  class="flex space-x-4 items center font-bold">
+            <label class="container w-4">
+            <input type="checkbox" checked="checked" x-model="F">
+            <div class="checkmark"></div>
+           </label>
+           <h1>Female</h1>
+        </div>
+            <div  class="flex space-x-4 items center font-bold">
+            <label class="container w-4">
+            <input type="checkbox" checked="checked" x-model="C">
+            <div class="checkmark"></div>
+            </label>
+            <h1>Company</h1>
+        </div>
+        </div>
+         <div class="relative space-y-4">
+
+            <div x-show="M || F" class="static flex flex-row justify-between">
+                <div><h1 class="font-bold text-lg text-indigo-600">First Name</h1><input x-bind:class="{'my-class': F || C}"  class="px-4 py-2 bg-teal-500 rounded-full" type="text" placeholder="Enter your FirstName.."></div>
+                <div><h1 class="font-bold text-lg text-indigo-600">Last Name</h1><input  x-bind:class="{'my-class': !}" class="px-4 py-2 bg-teal-500 rounded-full" type="text" placeholder="Enter your LastName.."></div>
+            </div>
+            <div x-show="C" class="static"><div><h1 class="font-bold text-lg text-indigo-600">Company Name</h1><input  class="px-4 py-2 bg-teal-500 rounded-full" type="text" placeholder="Enter your LastName.."></div></div>
+            
+            <div class="space-y-2">
+                <div class="flex flex-row justify-between">
+                <div><h1 class="font-bold text-lg text-indigo-600">Governate</h1><input  class="px-4 py-2 bg-teal-500 rounded-full" type="text" placeholder="Enter your Governate.."></div>
+                <div><h1 class="font-bold text-lg text-indigo-600">Delegation</h1><input  class="px-4 py-2 bg-teal-500 rounded-full" type="text" placeholder="Enter your Delegation.."></div></div>
+                <div class="flex flex-row justify-between">
+                <div><h1 class="font-bold text-lg text-indigo-600">Phone number</h1><input  class="px-4 py-2 bg-teal-500 rounded-full" type="number" maxlength="8" minlength="8" placeholder="Enter your Phone number.."></div>
+                <div><h1 class="font-bold text-lg text-indigo-600" >Email</h1><input  class="px-4 py-2 bg-teal-500 rounded-full" type="email" placeholder="Enter your email.."></div></div>
+            </div>
+         </div>
+    </div>
+   
+    <div x-data="{ selectedOption: '' }" x-show="showw" class="static space-y-4 text-indigo-600">
+        <div class="space-y-2"><h1 class="font-bold text-lg text-indigo-600">Model</h1>
+            <select  class="text-black rounded p-2"  >
+                <option >--</option>
+                <option value="">Toyota Camry</option>
+                <option value="">Honda Civic</option>
+                <option value="">Ford F-150</option>
+                <option value="">Chevrolet Silverado</option>
+              </select>
+        </div>
+        <div class="space-y-2"><h1 class="font-bold text-lg text-indigo-600">Version</h1>
+            <input v-model="vehicule.numChass" class="px-4 py-2 bg-teal-500 rounded-full" placeholder="Vehicle version ..">
+       </div>
+        <div class="space-y-2"><h1 class="font-bold text-lg text-indigo-600">Type of registration</h1>
+            <select v-model="type" class="text-black rounded p-2" x-model="selectedOption" id="select">
+                <option>--</option>
+                <option value="TUN">Normal Series (TUN)</option>
+                <option value="RS">Suspensive Regime (RS)</option>
+                <option value="CD">Diplomatic Corps (CD)</option>
+              </select>
+        </div>
+        <div class="space-y-2 space-x-4"><h1 class="font-bold text-lg text-indigo-600" >Registration number</h1>
+             <div class="flex flex-row">
+                <input v-model="numSerie" class="px-4 py-2 bg-teal-500 rounded-full" type="number" placeholder="N° série" id="nSerie">
+                <h1 class="rounded bg-white mx-2 text-center text-black pt-2 px-2" x-text="selectedOption"></h1>
+                <input v-model="numEnreg" class="px-4 py-2 bg-teal-500 rounded-full" type="number" placeholder="N° d'enregistrement" id="nEnreg">
+                
+             </div>
+        </div>
+        <div class="space-y-2"><h1 class="font-bold text-lg text-indigo-600">VIN number</h1>
+             <input  class="px-4 py-2 bg-teal-500 rounded-full" placeholder="Tapez les 6 dernières chiffres de votre VIN" type="text" maxlength="6" minlength="6" id="numChass">
+        </div>
+    </div>
+     </div>
+
+   <a href="validationForm.html" class="flex justify-center items-center px-4 py-2 bg-indigo-600 rounded-b-full w-1/2">  <button onclick="signUp" x-data="{show:false}" x-on:click="show=!show"  >Sign up
+    </button></a>
+    <p id="ex" class="hidden">Existing account:</p>
+    <a id="signin" href="Login.html" class="hidden"><button >Sign in</button></a>
+    
+    </div>
+   
+   
+</body>
+<footer class="text-white space-x-10 p-10 flex flex-row ">
+    <div class="w-1/4 space-y-2">
+    <div class="flex flex-row  space-x-2 items-center">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="fill-white w-12 h-12">
+            <path fill-rule="evenodd" d="M12 6.75a5.25 5.25 0 016.775-5.025.75.75 0 01.313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.64l3.318-3.319a.75.75 0 011.248.313 5.25 5.25 0 01-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 112.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0112 6.75zM4.117 19.125a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" clip-rule="evenodd" />
+            <path d="M10.076 8.64l-2.201-2.2V4.874a.75.75 0 00-.364-.643l-3.75-2.25a.75.75 0 00-.916.113l-.75.75a.75.75 0 00-.113.916l2.25 3.75a.75.75 0 00.643.364h1.564l2.062 2.062 1.575-1.297z" />
+            <path fill-rule="evenodd" d="M12.556 17.329l4.183 4.182a3.375 3.375 0 004.773-4.773l-3.306-3.305a6.803 6.803 0 01-1.53.043c-.394-.034-.682-.006-.867.042a.589.589 0 00-.167.063l-3.086 3.748zm3.414-1.36a.75.75 0 011.06 0l1.875 1.876a.75.75 0 11-1.06 1.06L15.97 17.03a.75.75 0 010-1.06z" clip-rule="evenodd" />
+          </svg>
+          
+        <h1 style="font-family: 'Rajdhani', sans-serif;" class="text-bold text-4xl">MyCar</h1>
+    </div>
+<p>High-quality vehicle servicing, maintenance, and repairs for all makes and models. At guaranteed affordable quality with a personal touch. That's MyCar Car Service!</p>
+    </div>
+
+    <div class="w-1/4 space-y-2">
+        <h1>Follow Us</h1>
+        <div class="flex space-x-2 flex-row">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
+         </svg>
+         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-instagram curso-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"></path>
+            <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+            <path d="M16.5 7.5l0 .01"></path>
+         </svg>
+         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z"></path>
+         </svg>
+         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+            <path d="M8 11l0 5"></path>
+            <path d="M8 8l0 .01"></path>
+            <path d="M12 16l0 -5"></path>
+            <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+         </svg>
+    </div>
+    </div>
+
+    <div class="w-1/4 space-y-2">
+        <h1>Our company</h1>
+        <div class="flex flex-col space-y-2">
+        <a class="hover:underline" href="index.html">About US</a>
+        <a class="hover:underline" href="">We are hiring !</a>
+        <a class="hover:underline" href="">News</a>
+    </div>
+    </div>
+    <div class="w-1/4 space-y-2">
+    <p>© 2010-2023 GetApp. All Rights Reserved.
+        GetApp® is a registered trademark of Nubera eBusiness S.L. Nubera eBusiness uses its own and third-party cookies. By using the website you are accepting the use of these cookies. </p>
+    </div>
+</footer>

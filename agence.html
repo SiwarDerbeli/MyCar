@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+<script>
+    function handleClick() {
+    
+     localStorage.setItem('agence','agence A')
+  }
+</script>
+<style>
+    button {
+ position: relative;
+ padding: 1em 1.8em;
+ outline: none;
+ border: 1px solid #303030;
+ background: #212121;
+ color: #ae00ff;
+ text-transform: uppercase;
+ letter-spacing: 2px;
+ font-size: 15px;
+ overflow: hidden;
+ transition: 0.2s;
+ border-radius: 10px;
+ cursor: pointer;
+ font-weight: bold;
+}
+
+button:hover {
+ box-shadow: 0 0 10px #ae00ff, 0 0 25px #001eff, 0 0 50px #ae00ff;
+ transition-delay: 0.6s;
+}
+
+button span {
+ position: absolute;
+}
+
+button span:nth-child(1) {
+ top: 0;
+ left: -100%;
+ width: 100%;
+ height: 2px;
+ background: linear-gradient(90deg, transparent, #ae00ff);
+}
+
+button:hover span:nth-child(1) {
+ left: 100%;
+ transition: 0.7s;
+}
+
+button span:nth-child(3) {
+ bottom: 0;
+ right: -100%;
+ width: 100%;
+ height: 2px;
+ background: linear-gradient(90deg, transparent, #001eff);
+}
+
+button:hover span:nth-child(3) {
+ right: 100%;
+ transition: 0.7s;
+ transition-delay: 0.35s;
+}
+
+button span:nth-child(2) {
+ top: -100%;
+ right: 0;
+ width: 2px;
+ height: 100%;
+ background: linear-gradient(180deg, transparent, #ae00ff);
+}
+
+button:hover span:nth-child(2) {
+ top: 100%;
+ transition: 0.7s;
+ transition-delay: 0.17s;
+}
+
+button span:nth-child(4) {
+ bottom: -100%;
+ left: 0;
+ width: 2px;
+ height: 100%;
+ background: linear-gradient(360deg, transparent, #001eff);
+}
+
+button:hover span:nth-child(4) {
+ bottom: 100%;
+ transition: 0.7s;
+ transition-delay: 0.52s;
+}
+
+button:active {
+ background: #ae00af;
+ background: linear-gradient(to top right, #ae00af, #001eff);
+ color: #bfbfbf;
+ box-shadow: 0 0 8px #ae00ff, 0 0 8px #001eff, 0 0 8px #ae00ff;
+ transition: 0.1s;
+}
+
+button:active span:nth-child(1) 
+span:nth-child(2) 
+span:nth-child(2) 
+span:nth-child(2) {
+ transition: none;
+ transition-delay: none;
+}
+
+    .card {
+  overflow: visible;
+  width: 190px;
+  height: 254px;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 300ms;
+  box-shadow: 0px 0px 10px 1px #000000ee;
+  border-radius: 5px;
+}
+
+.front, .back {
+  background-color: #151515;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.back {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.back::before {
+  position: absolute;
+  content: ' ';
+  display: block;
+  width: 160px;
+  height: 160%;
+  background: linear-gradient(90deg, transparent, #ff9966, #ff9966, #ff9966, #ff9966, transparent);
+  animation: rotation_481 5000ms infinite linear;
+}
+
+.back-content {
+  position: absolute;
+  width: 99%;
+  height: 99%;
+  background-color: #151515;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.card:hover .content {
+  transform: rotateY(180deg);
+}
+
+@keyframes rotation_481 {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  0% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.front {
+  transform: rotateY(180deg);
+  color: white;
+}
+
+.front .front-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.front-content .badge {
+  background-color: #00000055;
+  padding: 2px 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  width: fit-content;
+}
+
+.description {
+  box-shadow: 0px 0px 10px 5px #00000088;
+  width: 100%;
+  padding: 10px;
+  background-color: #00000099;
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+}
+
+.title {
+  font-size: 11px;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title p {
+  width: 50%;
+}
+
+.card-footer {
+  color: #ffffff88;
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+.front .img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: #ffbb66;
+  position: relative;
+  filter: blur(15px);
+  animation: floating 2600ms infinite linear;
+}
+
+#bottom {
+  background-color: #ff8866;
+  left: 50px;
+  top: 0px;
+  width: 150px;
+  height: 150px;
+  animation-delay: -800ms;
+}
+
+#right {
+  background-color: #ff2233;
+  left: 160px;
+  top: -80px;
+  width: 30px;
+  height: 30px;
+  animation-delay: -1800ms;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+</style>
+
+        
+      
+    </head>
+    <body   >
+        <!-- nav barre -->
+        <div class="bg-zinc-800 flex  pl-6 flex-row items-center justify-between px-14 py-4 p-10">
+          <div class="flex flex-row pl-10 space-x-2 items-center">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-teal-400 w-12 h-12">
+               <path fill-rule="evenodd" d="M12 6.75a5.25 5.25 0 016.775-5.025.75.75 0 01.313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.64l3.318-3.319a.75.75 0 011.248.313 5.25 5.25 0 01-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 112.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0112 6.75zM4.117 19.125a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" clip-rule="evenodd" />
+               <path d="M10.076 8.64l-2.201-2.2V4.874a.75.75 0 00-.364-.643l-3.75-2.25a.75.75 0 00-.916.113l-.75.75a.75.75 0 00-.113.916l2.25 3.75a.75.75 0 00.643.364h1.564l2.062 2.062 1.575-1.297z" />
+               <path fill-rule="evenodd" d="M12.556 17.329l4.183 4.182a3.375 3.375 0 004.773-4.773l-3.306-3.305a6.803 6.803 0 01-1.53.043c-.394-.034-.682-.006-.867.042a.589.589 0 00-.167.063l-3.086 3.748zm3.414-1.36a.75.75 0 011.06 0l1.875 1.876a.75.75 0 11-1.06 1.06L15.97 17.03a.75.75 0 010-1.06z" clip-rule="evenodd" />
+             </svg>
+             
+             <h1 style="font-family: 'Rajdhani', sans-serif;" class="text-bold text-4xl text-white">MyCar</h1>
+           </div>
+           <div x-data="{ open: false, openn:false }" class="flex p-8 flex-row items-center space-x-8 text-white">
+             <h1 class="cursor-pointer hover:text-slate-400"><a href="index.html"> Home</a></h1>
+             <h1 class="cursor-pointer hover:text-slate-400" x-on:mouseout="open = ! open" x-on:mouseover="open = ! open"><a href="services.html">Services
+               <ul class="text-white" x-show="open">
+                 <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="quick service.html">Quick service</a></li>
+                 <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="diagnostic service.html">Diagnostic service</a></li>
+                 <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="repair service.html">Repair Service</a></li>
+                 <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="1000.html">1000km service</a></li>
+               </ul>
+             </a></h1>
+             <h1 class="cursor-pointer hover:text-slate-400"><a href="RDV.html">My appointments</a> </h1>
+    
+             <h1 class="cursor-pointer hover:text-slate-400" x-on:mouseout="openn = ! openn" x-on:mouseover="openn = ! openn">Custumer Service
+            <ul class="text-white" x-show="openn">
+              <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="centre d'assistance.html">Help Center</a></li>
+              <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="satisfaction.html">Satisfaction</a></li>
+              <li class="border border-teal-400 p-2 hover:bg-teal-200 hover:text-zinc-800 rounded"><a href="reclamation.html">Complaint</a></li>
+              
+            </ul>
+             </h1>
+             <div>
+             <button class="hover:text-teal-200 rounded p-2 border border-teal-400 text-teal-400 font-bold"><a href="Login.html"> Login</a></button>
+             <button class="hover:bg-teal-200 rounded p-2 bg-teal-400 text-white "><a href="Regsitration.html"> Register</a></button>
+             </div>
+           </div>
+           </div>
+        <!-- main -->
+        
+
+
+     <div x-data="{show:false}" class="p-10 space-y-4 ">
+
+        <h1 style="font-family: 'Rajdhani', sans-serif;" class="bg-indigo-600 drop-shadow-lg p-6 w-full rounded text-5xl">Choose agency</h1>
+<p style="font-family: 'Rajdhani', sans-serif;" class="text-xl">Here's a list of our agencies, Click on the nearest one to you and complete scheduling your appointment</p>
+        <div  class="flex flex-wrap p-6 space-x-4 justify-center">
+
+            <div x-on:click="show = !show" onclick="handleClick(event)" id="Agence A"  class="card cursor-pointer">
+                <div class="content">
+                  <div class="back">
+                    <div class="back-content">
+                      <img src="Assets/download-removebg-preview.png" alt="">
+                      <strong>Agenc A</strong>
+                    </div>
+                  </div>
+                  <div class="front">
+                    
+                    <div class="img">
+                      <div class="circle">
+                      </div>
+                      <div class="circle" id="right">
+                      </div>
+                      <div class="circle" id="bottom">
+                      </div>
+                    </div>
+              
+                    <div class="front-content">
+                      
+                      <div class="description">
+                        <div class="title">
+                          <p class="title">
+                            <div class="flex space-x-2 items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-teal-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                  </svg>
+                                  <strong>LocalisationA</strong>
+
+                            </div>
+                          </p>
+                          <svg fill-rule="nonzero" height="15px" width="15px" viewBox="0,0,256,256" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none" font-family="none" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></g></svg>
+                        </div>
+                        <p class="card-footer">
+                          hfhfh bfjhf hfgeehf sjzheue gfeyufyue zehvffzlfezfb
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           
+
+              <div x-on:click="show = !show" id="Agence B" class="card cursor-pointer">
+                <div class="content">
+                  <div class="back">
+                    <div class="back-content">
+                      <img class="inline-block" src="Assets/download-removebg-preview.png" alt="">
+                      <strong>Agenc B</strong>
+                    </div>
+                  </div>
+                  <div class="front">
+                    
+                    <div class="img">
+                      <div class="circle">
+                      </div>
+                      <div class="circle" id="right">
+                      </div>
+                      <div class="circle" id="bottom">
+                      </div>
+                    </div>
+              
+                    <div class="front-content">
+                      
+                      <div class="description">
+                        <div class="title">
+                          <p class="title">
+                            <div class="flex space-x-2 items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-teal-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                  </svg>
+                                  <strong>LocalisationB</strong>
+
+                            </div>
+                          </p>
+                          <svg fill-rule="nonzero" height="15px" width="15px" viewBox="0,0,256,256" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none" font-family="none" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></g></svg>
+                        </div>
+                        <p class="card-footer">
+                          description description description description description
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div x-on:click="show = !show" id="Agence C" class="card cursor-pointer">
+                <div class="content">
+                  <div class="back">
+                    <div class="back-content">
+                      <img class="inline-block" src="Assets/download-removebg-preview.png" alt="">
+                      <strong>Agenc C</strong>
+                    </div>
+                  </div>
+                  <div class="front">
+                    
+                    <div class="img">
+                      <div class="circle">
+                      </div>
+                      <div class="circle" id="right">
+                      </div>
+                      <div class="circle" id="bottom">
+                      </div>
+                    </div>
+              
+                    <div class="front-content">
+                      
+                      <div class="description">
+                        <div class="title">
+                          <p class="title">
+                            <div class="flex space-x-2 items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-teal-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                  </svg>
+                                  <strong>LocalisationC</strong>
+
+                            </div>
+                          </p>
+                          <svg fill-rule="nonzero" height="15px" width="15px" viewBox="0,0,256,256" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none" font-family="none" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></g></svg>
+                        </div>
+                        <p class="card-footer">
+                          website tel description description
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div x-on:click="show = !show" id="Agence D" class="card cursor-pointer">
+                <div class="content">
+                  <div class="back">
+                    <div class="back-content">
+                      <img class="inline-block" src="Assets/download-removebg-preview.png" alt="">
+                      <strong>Agenc D</strong>
+                    </div>
+                  </div>
+                  <div class="front">
+                    
+                    <div class="img">
+                      <div class="circle">
+                      </div>
+                      <div class="circle" id="right">
+                      </div>
+                      <div class="circle" id="bottom">
+                      </div>
+                    </div>
+              
+                    <div class="front-content">
+                      
+                      <div class="description">
+                        <div class="title">
+                          <p class="title">
+                            <div class="flex space-x-2 items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-teal-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                  </svg>
+                                  <strong>LocalisationD</strong>
+
+                            </div>
+                          </p>
+                          <svg fill-rule="nonzero" height="15px" width="15px" viewBox="0,0,256,256" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none" font-family="none" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></g></svg>
+                        </div>
+                        <p class="card-footer">
+                          website tel description description description
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div x-on:click="show = !show" id="Agence E" class="card cursor-pointer">
+                <div class="content">
+                  <div class="back">
+                    <div class="back-content">
+                      <img class="inline-block" src="Assets/download-removebg-preview.png" alt="">
+                      <strong>Agenc E</strong>
+                    </div>
+                  </div>
+                  <div class="front">
+                    
+                    <div class="img">
+                      <div class="circle">
+                      </div>
+                      <div class="circle" id="right">
+                      </div>
+                      <div class="circle" id="bottom">
+                      </div>
+                    </div>
+              
+                    <div class="front-content">
+                      
+                      <div class="description">
+                        <div class="title">
+                          <p class="title">
+                            <div class="flex space-x-2 items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-teal-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                  </svg>
+                                  <strong>LocalisationE</strong>
+
+                            </div>
+                          </p>
+                          <svg fill-rule="nonzero" height="15px" width="15px" viewBox="0,0,256,256" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none" font-family="none" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></g></svg>
+                        </div>
+                        <p class="card-footer">
+                          website tel description description description
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div x-on:click="show = !show" id="Agence F" class="card cursor-pointer">
+                <div class="content">
+                  <div class="back">
+                    <div class="back-content">
+                      <img class="inline-block" src="Assets/download-removebg-preview.png" alt="">
+                      <strong>Agenc F</strong>
+                    </div>
+                  </div>
+                  <div class="front">
+                    
+                    <div class="img">
+                      <div class="circle">
+                      </div>
+                      <div class="circle" id="right">
+                      </div>
+                      <div class="circle" id="bottom">
+                      </div>
+                    </div>
+              
+                    <div class="front-content">
+                      
+                      <div class="description">
+                        <div class="title">
+                          <p class="title">
+                            <div class="flex space-x-2 items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-teal-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                                  </svg>
+                                  <strong>LocalisationF</strong>
+
+                            </div>
+                          </p>
+                          <svg fill-rule="nonzero" height="15px" width="15px" viewBox="0,0,256,256" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g style="mix-blend-mode: normal" text-anchor="none" font-size="none" font-weight="none" font-family="none" stroke-dashoffset="0" stroke-dasharray="" stroke-miterlimit="10" stroke-linejoin="miter" stroke-linecap="butt" stroke-width="1" stroke="none" fill-rule="nonzero" fill="#20c997"><g transform="scale(8,8)"><path d="M25,27l-9,-6.75l-9,6.75v-23h18z"></path></g></g></svg>
+                        </div>
+                        <p class="card-footer">
+                          website tel description description description
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+        </div>
+
+      <a x-show="show" href="RDV.html">  <button class="p-2 bg-zinc-800 text-white ml-4">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span> Done
+          </button></a>
+       
+
+    </div>	
+    </body>
+    <footer class="text-white space-x-10 p-10 flex flex-row ">
+      <div class="w-1/4 space-y-2">
+      <div class="flex flex-row  space-x-2 items-center">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="fill-white w-12 h-12">
+              <path fill-rule="evenodd" d="M12 6.75a5.25 5.25 0 016.775-5.025.75.75 0 01.313 1.248l-3.32 3.319c.063.475.276.934.641 1.299.365.365.824.578 1.3.64l3.318-3.319a.75.75 0 011.248.313 5.25 5.25 0 01-5.472 6.756c-1.018-.086-1.87.1-2.309.634L7.344 21.3A3.298 3.298 0 112.7 16.657l8.684-7.151c.533-.44.72-1.291.634-2.309A5.342 5.342 0 0112 6.75zM4.117 19.125a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" clip-rule="evenodd" />
+              <path d="M10.076 8.64l-2.201-2.2V4.874a.75.75 0 00-.364-.643l-3.75-2.25a.75.75 0 00-.916.113l-.75.75a.75.75 0 00-.113.916l2.25 3.75a.75.75 0 00.643.364h1.564l2.062 2.062 1.575-1.297z" />
+              <path fill-rule="evenodd" d="M12.556 17.329l4.183 4.182a3.375 3.375 0 004.773-4.773l-3.306-3.305a6.803 6.803 0 01-1.53.043c-.394-.034-.682-.006-.867.042a.589.589 0 00-.167.063l-3.086 3.748zm3.414-1.36a.75.75 0 011.06 0l1.875 1.876a.75.75 0 11-1.06 1.06L15.97 17.03a.75.75 0 010-1.06z" clip-rule="evenodd" />
+            </svg>
+            
+          <h1 style="font-family: 'Rajdhani', sans-serif;" class="text-bold text-4xl">MyCar</h1>
+      </div>
+<p>High-quality vehicle servicing, maintenance, and repairs for all makes and models. At guaranteed affordable quality with a personal touch. That's MyCar Car Service!</p>
+      </div>
+
+      <div class="w-1/4 space-y-2">
+          <h1>Follow Us</h1>
+          <div class="flex space-x-2 flex-row">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
+           </svg>
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-instagram curso-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"></path>
+              <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+              <path d="M16.5 7.5l0 .01"></path>
+           </svg>
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z"></path>
+           </svg>
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin cursor-pointer" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
+              <path d="M8 11l0 5"></path>
+              <path d="M8 8l0 .01"></path>
+              <path d="M12 16l0 -5"></path>
+              <path d="M16 16v-3a2 2 0 0 0 -4 0"></path>
+           </svg>
+      </div>
+      </div>
+
+      <div class="w-1/4 space-y-2">
+          <h1>Our company</h1>
+          <div class="flex flex-col space-y-2">
+          <a class="hover:underline" href="index.html">About US</a>
+          <a class="hover:underline" href="">We are hiring !</a>
+          <a class="hover:underline" href="">News</a>
+      </div>
+      </div>
+      <div class="w-1/4 space-y-2">
+      <p>© 2010-2023 GetApp. All Rights Reserved.
+          GetApp® is a registered trademark of Nubera eBusiness S.L. Nubera eBusiness uses its own and third-party cookies. By using the website you are accepting the use of these cookies. </p>
+      </div>
+  </footer>
+</html>		    
